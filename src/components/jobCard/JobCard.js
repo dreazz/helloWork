@@ -9,7 +9,7 @@ export default class jobCard extends Component {
         <p><strong>Company: </strong>{this.props.company}</p>
         <p><strong>status: </strong>{this.props.status}</p>
         <p><strong>date: </strong>{this.props.date}</p>
-        <button><a href={this.props.link}>See more</a></button>
+        <button><a href={this.props.link} target="_blank">See more</a></button>
       </div>
     )
   }
