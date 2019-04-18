@@ -1,25 +1,27 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
+import JobCard from './components/jobCard/JobCard'
 import './App.css';
 
 class App extends Component {
+  state = {
+    jobArray: [
+      {name:"web developer",
+       description:"this is an example of a job"   
+    }]
+  }
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+      <div className="main">
+        <div className="header">
+          <h1>Say Hi, to your new job <span role="image">👋</span></h1>
+        </div>
+        <div class="body">
+        {this.state.jobArray.map((job)=>{
+          return <JobCard title={job.name} description={job.description}/>
+        })}
+         
+        </div>
       </div>
     );
   }
