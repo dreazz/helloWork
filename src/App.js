@@ -26,8 +26,8 @@ class App extends Component {
         <div className="header">
           <h1>Say Hi, to your new job <span role="image">👋</span></h1>
             <div className="filter-container">
-              <button className="filter-btn" onClick={this.handleClickDev}>I'am a Dev</button>
-              <button className="filter-btn" onClick={this.handleClickUx}>I'am a Ux/Ui</button>
+              <button className="filter-btn" onClick={this.handleClickDev}>Dev</button>
+              <button className="filter-btn" onClick={this.handleClickUx}>Ux/Ui</button>
             </div>
           </div>
         <div className="body">
