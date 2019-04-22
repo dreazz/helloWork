@@ -38,19 +38,14 @@ handleChange = (e) => {
   }
   let newSearch = []
   if(this.state.jobType === 'dev'){
-    newSearch = this.state.devJobsArray.filter((job) => {
-        if(job.Position.slice(0,e.target.value.length).toUpperCase() === e.target.value.toUpperCase()){
-        return job
-      }  
-    
+    newSearch = this.state.devJobsArray.filter((job) => {   
+      return job.Position.toLowerCase().includes(e.target.value.toLowerCase())
     })
+
 }else{
   newSearch = this.state.uxJobsArray.filter((job) => {
-    if(job.Position.slice(0,e.target.value.length).toUpperCase() === e.target.value.toUpperCase()){
-    return job
-  }  
-
-})
+    return job.Position.toLowerCase().includes(e.target.value.toLowerCase())
+  })
 }
   console.log("new search",newSearch)
    this.setState({
@@ -66,7 +61,7 @@ render() {
           <h1>Say Hi, to your new job <span role="image">👋</span></h1>
             <div className="filter-container">
               <button className="filter-btn" onClick={this.handleClickDev}>Dev</button>
-              <button className="filter-btn" onClick={this.handleClickUx}>Ux/Ui</button>
+              <button className="filter-btn" onClick={this.handleClickUx}>UX/UI</button>
             </div>
             <SearchBar onChange={this.handleChange}/>
           </div>
