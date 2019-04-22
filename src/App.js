@@ -18,12 +18,13 @@ class App extends Component {
   }
   handleClickDev = () => {
       this.setState({
-        jobType:'dev'
+        jobType:'dev',
       })
+    
   }
   handleClickUx = () => {
     this.setState({
-      jobType:'ux'
+      jobType:'ux',
     })
 }
 handleChange = (e) => { 
@@ -47,7 +48,6 @@ handleChange = (e) => {
     return job.Position.toLowerCase().includes(e.target.value.toLowerCase())
   })
 }
-  console.log("new search",newSearch)
    this.setState({
         searchArr:newSearch
       })
@@ -58,12 +58,13 @@ render() {
     return (
       <div className="main">
         <div className="header">
-          <h1>Say Hi, to your new job <span role="image">👋</span></h1>
+          <h1>Say hi to your new job <span role="image">👋</span></h1>
+          <SearchBar onChange={this.handleChange}/>
             <div className="filter-container">
               <button className="filter-btn" onClick={this.handleClickDev}>Dev</button>
               <button className="filter-btn" onClick={this.handleClickUx}>UX/UI</button>
             </div>
-            <SearchBar onChange={this.handleChange}/>
+          
           </div>
           {this.state.searchResult? 
            <div className="body search">
