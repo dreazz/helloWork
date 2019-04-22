@@ -3,12 +3,18 @@ import logo from './logo.svg';
 import JobCard from './components/jobCard/JobCard';
 import jobDataDev from './jobsApril.json' ;
 import jobDataUx from './uxuiJobsApril.json';
+import SearchBar from './components/searchBar/SearchBar';
 
 import './App.css';
 
 class App extends Component {
   state = {
-    jobType:'dev'
+    devJobsArray:jobDataDev,
+    uxJobsArray:jobDataUx,
+    searchArr:[],
+    jobType:'dev',
+    search:false,
+    searchResult:false,
   }
   handleClickDev = () => {
       this.setState({
@@ -20,7 +26,40 @@ class App extends Component {
       jobType:'ux'
     })
 }
-  render() {
+handleChange = (e) => { 
+  if(e.target.value.length > 0){
+    this.setState({
+      searchResult:true
+    })
+  }else{
+    this.setState({
+      searchResult:false
+    })
+  }
+  let newSearch = []
+  if(this.state.jobType === 'dev'){
+    newSearch = this.state.devJobsArray.filter((job) => {
+        if(job.Position.slice(0,e.target.value.length).toUpperCase() === e.target.value.toUpperCase()){
+        return job
+      }  
+    
+    })
+}else{
+  newSearch = this.state.uxJobsArray.filter((job) => {
+    if(job.Position.slice(0,e.target.value.length).toUpperCase() === e.target.value.toUpperCase()){
+    return job
+  }  
+
+})
+}
+  console.log("new search",newSearch)
+   this.setState({
+        searchArr:newSearch
+      })
+     
+}
+render() {
+  
     return (
       <div className="main">
         <div className="header">
@@ -29,18 +68,29 @@ class App extends Component {
               <button className="filter-btn" onClick={this.handleClickDev}>Dev</button>
               <button className="filter-btn" onClick={this.handleClickUx}>Ux/Ui</button>
             </div>
+            <SearchBar onChange={this.handleChange}/>
           </div>
-        <div className="body">
-        {this.state.jobType === 'dev'?
-          jobDataDev.map((job,i)=>{
-          return <JobCard key={job.Company + `${i}`}position={job.Position} company={job.Company} status={job.Status} date={job.Date} link={job.LinkUrl}/>
-        }) 
-          :
-          jobDataUx.map((job,i)=>{
-            return <JobCard key={job.Company + `${i}`}position={job.Position} company={job.Company} status={job.Status} date={job.Date} link={job.LinkUrl}/>
-          })
-        }
-        </div>
+          {this.state.searchResult? 
+           <div className="body search">
+            {this.state.searchArr.map((job,i)=>{
+             return <JobCard key={job.Company + `${i}`}position={job.Position} company={job.Company} status={job.Status} date={job.Date} link={job.LinkUrl}/>
+              }) }
+            </div>
+            :
+                
+             <div className="body">
+              {this.state.jobType === 'dev'?
+                this.state.devJobsArray.map((job,i)=>{
+                  return <JobCard key={job.Company + `${i}`}position={job.Position} company={job.Company} status={job.Status} date={job.Date} link={job.LinkUrl}/>
+                }) 
+              :
+              this.state.uxJobsArray.map((job,i)=>{
+                return <JobCard key={job.Company + `${i}`}position={job.Position} company={job.Company} status={job.Status} date={job.Date} link={job.LinkUrl}/>
+                })
+              }
+          </div>
+          
+          }
       </div>
     );
   }
