@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
 import JobCard from './../components/jobCard/JobCard';
 import jobDataDev from './../jobsApril.json' ;
 import jobDataUx from './../uxuiJobsApril.json';
@@ -53,7 +54,7 @@ handleChange = (e) => {
   render() {
     return (
       <div className="main">
-     
+      <Link to="/jobPost"><button>create job</button></Link>
         <div className="header">
           <h1>Say hi to your new job <span role="image">👋</span></h1>
           <SearchBar onChange={this.handleChange}/>
