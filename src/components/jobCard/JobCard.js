@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import "./jobCard.css"
+import "./job-card.css"
 
 export default class jobCard extends Component {
   render() {
