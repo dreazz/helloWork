@@ -7,18 +7,14 @@ const encode = (data) => {
 
 export default class Form extends Component {
   state={
-    name:"",
-    description:"",
+    title:"",
+    company:"",
+    position:"",
+    link:""
   }
 
   handleSubmit = e => {
-    fetch("/", {
-      method: "POST",
-      headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      body: encode({ "form-name": "contact", ...this.state })
-    })
-      .then(() => alert("Success!"))
-      .catch(error => alert(error));
+   
 
     e.preventDefault();
   };
@@ -30,7 +26,7 @@ export default class Form extends Component {
         <form onSubmit={this.handleSubmit}>
           <p>
             <label>
-              Your Name: <input type="text" name="name" value={name} onChange={this.handleChange} />
+              Your Name: <input type="text" name="title" value={title} onChange={this.handleChange} />
             </label>
           </p>
           <p>
