@@ -1,42 +1,43 @@
 import React, { Component } from 'react'
-const encode = (data) => {
-  return Object.keys(data)
-      .map(key => encodeURIComponent(key) + "=" + encodeURIComponent(data[key]))
-      .join("&");
-}
+import axios from 'axios';
+
 
 export default class Form extends Component {
   state={
-    title:"",
-    company:"",
     position:"",
+    company:"",
+    description:"",
     link:""
   }
+ api  = axios.create({
+        baseURL: "https://hellow-work-api.herokuapp.com",
+        withCredentials: true
+      })
+    }
 
   handleSubmit = e => {
-   
-
     e.preventDefault();
+    const {position,company,description,link} = this.state
+      return api.post('/job', {position,company,description,link})
+        .then(({ data }) => data);
+    
   };
 
   handleChange = e => this.setState({ [e.target.name]: e.target.value });
   render() {
-    const { name, description } = this.state;
       return (
         <form onSubmit={this.handleSubmit}>
-          <p>
-            <label>
-              Your Name: <input type="text" name="title" value={title} onChange={this.handleChange} />
-            </label>
-          </p>
-          <p>
-            <label>
-              Description: <input type="text" name="description" value={description} onChange={this.handleChange} />
-            </label>
-          </p>
-          <p>
+          <label for="position">Position</label>
+            <input type="text" name="position"  onChange={this.handleChange} />
+          <label for="company">Company</label>
+            <input type="text" name="company"  onChange={this.handleChange} />
+          <label for="description">Description</label>
+            <textarea type="text" name="description"  onChange={this.handleChange} />
+          <label for="link">Link</label>
+            <input type="text" name="link"  onChange={this.handleChange} />
+-
             <button type="submit">Send</button>
-          </p>
+        
         </form>
       );
   }
