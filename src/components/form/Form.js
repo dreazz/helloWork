@@ -13,12 +13,12 @@ export default class Form extends Component {
         baseURL: "https://hellow-work-api.herokuapp.com",
         withCredentials: true
       })
-    }
+    
 
   handleSubmit = e => {
     e.preventDefault();
     const {position,company,description,link} = this.state
-      return api.post('/job', {position,company,description,link})
+      return this.api.post('/job', {position,company,description,link})
         .then(({ data }) => data);
     
   };
