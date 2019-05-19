@@ -10,16 +10,24 @@ export default class Form extends Component {
     link:""
   }
  api  = axios.create({
-        baseURL: "https://hellow-work-api.herokuapp.com",
+        baseURL: "http://localhost:5000",
         withCredentials: true
       })
     
 
   handleSubmit = e => {
     e.preventDefault();
+    console.log(this.state)
     const {position,company,description,link} = this.state
-      return this.api.post('/job', {position,company,description,link})
-        .then(({ data }) => data);
+    axios.post("http://localhost:5000/job",{
+      position:this.state.position,
+      company:this.state.company,
+      description:this.state.description,
+      link:this.state.link
+    })
+    .then(data=>{
+      console.log(data)
+    })
     
   };
 
